@@ -8,10 +8,10 @@ Fn functions executing `CRUD` operations on Oracle DB. This sample uses a simple
 
 ### Build the (base) Docker image containing Oracle JDBC driver
 
-- Clone this repo - `git clone https://github.com/abhirockzz/fn-oracledb-java`
+- Clone or download this repo
 - download the Oracle JDBC driver from [this link](https://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html) (`ojdbc7.jar` should be fine) and copy it to the `oracle_driver_docker` folder
 - Build a Docker image with the driver JAR (You will use an existing Dockerfile)
-	- `cd fn-oracledb-java/oracle_driver_docker`
+	- `cd fn-oracledb-java-workshop/oracle_driver_docker`
 	- `docker build -t oracle_jdbc_driver_docker .` (if you choose to change the name of the image i.e. `oracle_jdbc_driver_docker`, you'll need to update those references in the `build_image` section of the `func.yaml` for all the functions)
 
 (if successful) You should see an output as below
@@ -70,7 +70,7 @@ Fn functions executing `CRUD` operations on Oracle DB. This sample uses a simple
 
 Deploy one function at a time. For example, to deploy the `create` function
 
-- `cd fn-oracledb-java/create`
+- `cd fn-oracledb-java-workshop/create`
 - `fn -v deploy --app fn-oradb-java-app --local --no-bump` (`-v` will activate verbose mode)
 
 > Make sure you do not miss the `--local` option without which Fn will try to push the function Docker images to an external Docker registry
