@@ -62,11 +62,9 @@ Fn functions executing `CRUD` operations on Oracle DB. This sample uses a simple
 
 ### Create an app with required database configuration
 
-`fn create app --config DB_URL=<url in format jdbc:oracle:thin:@//host:port/service_name> --config DB_USER=workshopNNN --config DB_PASSWORD=<password> fn-oradb-java-app` 
+`fn create app --config DB_URL=jdbc:oracle:thin:@//129.213.138.81:1521/workshop_iad1hs.sub08241855250.workshoplisbonv.oraclevcn.com --config DB_USER=workshopNNN --config DB_PASSWORD=<password> fn-oradb-java-app` 
 
-> please replace `workshopNNN` with your username (**no hyphen**)
-
-e.g. `fn create app --config DB_URL=jdbc:oracle:thin:@//129.220.150.190:1521/test_iad1vc.sub07250801030.faasvcn.oraclevcn.com --config DB_USER=workshop100 --config DB_PASSWORD=tOps3cr3t fn-oradb-java-app`
+> Please replace `workshopNNN` in the `DB_USER` attribute with your username (**no hyphen**) and your database password (provided by the lab instructor) in the `DB_PASSWORD` attribute. Please leave the other parameters unchanged since they have been pre-configured based on the lab environment
 
 ## Deploy
 
