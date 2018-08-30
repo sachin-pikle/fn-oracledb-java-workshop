@@ -12,6 +12,7 @@ Fn functions executing `CRUD` operations on Oracle DB. This sample uses a simple
 - download the Oracle JDBC driver from [this link](https://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html) (`ojdbc7.jar` should be fine) and copy it to the `oracle_driver_docker` folder
 - Build a Docker image with the driver JAR (You will use an existing Dockerfile)
 	- `cd fn-oracledb-java-workshop/oracle_driver_docker`
+	- Start Docker on your machine
 	- `docker build -t oracle_jdbc_driver_docker .` (if you choose to change the name of the image i.e. `oracle_jdbc_driver_docker`, you'll need to update those references in the `build_image` section of the `func.yaml` for all the functions)
 
 (if successful) You should see an output as below
