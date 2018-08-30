@@ -1,8 +1,12 @@
+schema_version: 20180708
 name: fn-oradb-app-delete-func
 version: 0.0.1
 runtime: java
-cmd: io.fnproject.example.DeleteEmployeeFunction::handle
 build_image: oracle_jdbc_driver_docker
 run_image: fnproject/fn-java-fdk:jdk9-1.0.63
+cmd: io.fnproject.example.DeleteEmployeeFunction::handle
 format: http
-path: /delete
+triggers:
+- name: fn-oradb-app-delete-func
+  type: http
+  source: /fn-oradb-app-delete-func

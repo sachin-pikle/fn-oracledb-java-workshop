@@ -82,17 +82,37 @@ For `read` function deployment
 
 > Repeat for other functions i.e. `delete` and `update`
 
-Run `fn inspect app fn-oradb-java-app` to check your app
+- Run `fn inspect app fn-oradb-java-app` to check your app (and its config)
+
+		{
+		        "config": {
+		                "DB_PASSWORD": "t0ps3cr3t",
+		                "DB_URL": "jdbc:oracle:thin:@//129.213.138.81:1521/workshop_iad1hs.sub08241855250.workshoplisbonv.oraclevcn.com",
+		                "DB_USER": "workshop130"
+		        },
+		        "created_at": "2018-08-30T07:08:35.791Z",
+		        "id": "01CP4TK42FNG8G00GZJ0000002",
+		        "name": "fn-oradb-java-app",
+		        "updated_at": "2018-08-30T07:24:15.182Z"
+		}
+
+- Run `fn list functions fn-oradb-java-app` to check associated functions
+
+		NAME                            IMAGE
+		fn-oradb-app-create-func        fn-oradb-app-create-func:0.0.2
+		fn-oradb-app-delete-func        fn-oradb-app-delete-func:0.0.1
+		fn-oradb-app-read-func          fn-oradb-app-read-func:0.0.1
+		fn-oradb-app-update-func        fn-oradb-app-update-func:0.0.1
 
 > A custom Docker image has been used as `build_image` (see `func.yaml`) - this Docker image pre-packages the Oracle JDBC driver
 
 ## Test
 
-.. with Fn CLI using `fn call`
+.. with Fn CLI using `fn invoke`
 
 ### Create
 
-`echo -n '{"emp_email": "a@b.com","emp_name": "abhishek","emp_dept": "Product Divison"}' | fn call fn-oradb-java-app /create`
+`echo -n '{"emp_email": "a@b.com","emp_name": "abhishek","emp_dept": "Product Divison"}' | fn invoke fn-oradb-java-app fn-oradb-app-create-func`
 
 If successful, you should a response similar to this `Created employee CreateEmployeeInfo{emp_email=a@b.com, emp_name=abhishek, emp_dept=Product Divison}`
 
@@ -100,7 +120,7 @@ Create as many as you want - make sure that the `emp_email` is unique
 
 ### Read
 
-- `fn call fn-oradb-java-app /read` (to fetch all employees)
+- `fn invoke fn-oradb-java-app fn-oradb-app-read-func` (to fetch all employees)
 
 You should get back a JSON response similar to below
 
@@ -122,7 +142,7 @@ You should get back a JSON response similar to below
 	  }
 	]
 
-- `echo -n 'a@b.com' | fn call fn-oradb-java-app /read` (to fetch employee with email `a@b.com`)
+- `echo -n 'a@b.com' | fn invoke fn-oradb-java-app fn-oradb-app-read-func` (to fetch employee with email `a@b.com`)
 
 		[
 		  {
@@ -136,11 +156,11 @@ You should get back a JSON response similar to below
 
 It is possible to update the department of an employee
 
-`echo -n '{"emp_email": "a@b.com", "emp_dept": "Support Operations"}' | fn call fn-oradb-java-app /update`
+`echo -n '{"emp_email": "a@b.com", "emp_dept": "Support Operations"}' | fn invoke fn-oradb-java-app fn-oradb-app-update-func`
 
 Successful invocation will return back a message similar to `Updated employee UpdateEmployeeInfo{emp_email=a@b.com, emp_dept=Support Operations}`
 
-Check to make sure - `echo -n 'a@b.com' | fn call fn-oradb-java-app /read` - the updated department should reflect
+Check to make sure - `echo -n 'a@b.com' | fn invoke fn-oradb-java-app fn-oradb-app-read-func` - the updated department should reflect
 
 		[
 		  {
@@ -154,6 +174,6 @@ Check to make sure - `echo -n 'a@b.com' | fn call fn-oradb-java-app /read` - the
 
 Use employee email to specify which employee record you want to delete
 
-`echo -n 'a@b.com' | fn call fn-oradb-java-app /delete` and you should see `Deleted employee a@b.com` message
+`echo -n 'a@b.com' | fn invoke fn-oradb-java-app fn-oradb-app-delete-func` and you should see `Deleted employee a@b.com` message
 
-Check to make sure - `echo -n 'a@b.com' | fn call fn-oradb-java-app /read`
+Check to make sure - `echo -n 'a@b.com' | fn invoke fn-oradb-java-app fn-oradb-app-read-func`
