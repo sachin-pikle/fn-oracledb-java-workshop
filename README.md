@@ -8,7 +8,7 @@ Fn functions executing `CRUD` operations on Oracle DB. This sample uses a simple
 
 ### Build the (base) Docker image containing Oracle JDBC driver
 
-- Clone this repo - `git clone https://github.com/abhirockzz/fn-oracledb-java`
+- Clone or download this repo
 - download the Oracle JDBC driver from [this link](https://www.oracle.com/technetwork/database/features/jdbc/default-2280470.html) (`ojdbc7.jar` should be fine) and copy it to the `oracle_driver_docker` folder
 - Build a Docker image with the driver JAR (You will use an existing Dockerfile)
 	- `cd fn-oracledb-java/oracle_driver_docker`
